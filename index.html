@@ -8,23 +8,53 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
 
-</head>
-<body>
-  <header>
-    <h1>Header Bar</h1>
-  </header>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Font awesome icon (links) -->
+<link rel="stylesheet" href="fontawsome.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+<script src="fontawesome.js"></script>
+<link rel="stylesheet" href="header.css">
 
 </head>
 <body>
+  <header class="headerclass">
+    <div class="brand">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Philippine_Military_Academy_%28PMA%29.svg/400px-Philippine_Military_Academy_%28PMA%29.svg.png"  width="50" height="100">
+      <h1 class="font-effect-outline">CIS</h1>
+    </div>
+    <span class="fas fa-bars" id="menuIcon" onclick="toggle()"></span>
+    <div class="navbar" id="nav">
+      
+      <ul>
+        <li>
+          <span class="fas fa-home icon" id="headIcon"></span>
+          <a href="#"> Home </a>
+        </li>
+        <li>
+          <span class="fas fa-question-circle icon" id="headIcon"></span>
+          <a href="#"> Help </a>
+        </li>
+        <li>
+          <span class="fas fa-sign-out icon" id="headIcon"></span>
+          <a href="#"> Logout </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+
+  
+
+
+ 
+<nav class="sidebarclass">
 
   <div class="menu-btn">
     <i class="fas fa-bars"></i>
   </div>
 
-
   <div class="side-bar">
-
-    <header>
 
 
 
@@ -39,10 +69,10 @@
       <div class="item">
         <a class="sub-btn"><i class="fas fa-folder"></i>File Maintenance<i class="fas fa-angle-right dropdown"></i></a>
         <div class="sub-menu">
-          <a href="#" class="sub-item">Cadet</a>
-          <a href="#" class="sub-item">Faculty</a>
-          <a href="#" class="sub-item">Department</a>
-          <a href="#" class="sub-item">Courses</a>
+          <a href="cadet.html" class="sub-item">Cadet</a>
+          <a href="faculty.html" class="sub-item">Faculty</a>
+          <a href="department.html" class="sub-item">Department</a>
+          <a href="courses.html" class="sub-item">Courses</a>
         </div>
       </div>
 
@@ -105,15 +135,20 @@
       </div>
     </div>
   </div>
+</nav>
 
 
 
+
+
+      <script src="header.js"></script> 
       <script src="navbar.js"></script>
   
 
-  <main>
-    <h2>index</h2>
-    <p>This is the main content area.</p>
-  </main>
-</body>
+      <br>
+    <main class="continent">
+      <h2>index</h2>
+      <p>This is the main content area.</p>
+    </main>
+  </body>
 </html>

@@ -1,174 +1,213 @@
+<?php 
+  session_start(); 
+
+  if (!isset($_SESSION['username'])) {
+  	$_SESSION['msg'] = "You must log in first";
+  	header('location: login.php');
+  }
+  if (isset($_GET['logout'])) {
+  	session_destroy();
+  	unset($_SESSION['username']);
+  	header("location: login.php");
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Font awesome icon (links) -->
+<link rel="stylesheet" href="fontawsome.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+<script src="fontawesome.js"></script>
+<link rel="stylesheet" href="header.css">
 
 </head>
 <body>
-  <header>
-    <h1>Header Bar</h1>
-  </header>
+  <header class="headerclass">
+    <div class="brand">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Philippine_Military_Academy_%28PMA%29.svg/400px-Philippine_Military_Academy_%28PMA%29.svg.png"  width="50" height="100">
+      <h1 class="font-effect-outline">Faculty</h1>
+    </div>
+    <span class="fas fa-bars" id="menuIcon" onclick="toggle()"></span>
 
-  
-    <div class="sidenav">
-        <button class="dropdown-btn">File Maintenance 
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-          <ul>
-            <li class="line-1"><a href="cadet.html">Cadet</a></li>
-            <li class="line-2"><a href="faculty.html">Faculty</a></li>
-            <li class="line-3"><a href="department.html">Department</a></li>
-            <li class="line-4"><a href="courses.html">Courses</a></li>
-          </ul>
-        </div>
+    <div class="navbar" id="nav">
+      <ul>
+        <li>
+          <span class="fas fa-home icon" id="headIcon"></span>
+          <a href="#"> Home </a>
+        </li>
+        <li>
+          <span class="fas fa-question-circle icon" id="headIcon"></span>
+          <a href="#"> Help </a>
+        </li>
+        <li>
 
-        <button class="dropdown-btn">Inital Term Processing 
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-          <ul>
-            <button class="dropdown-content">Term Settings 
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-container">
-              <ul>
-                <li class="line-1"><a href="acad.html">ACAD</a></li>
-                <li class="line-2"><a href="tactics.html">Tactics</a></li>
-                <li class="line-3"><a href="conduct.html">Conduct</a></li>
-                <li class="line-4"><a href="aptitude.html">Aptitude</a></li>
-              </ul>
-            </div>
-            <li class="line-2"><a href="course-offerings.html">Course Offerings</a></li>
-            <li class="line-3"><a href="sectioning.html">Sectioning</a></li>
-          </ul>
+          <div class="content">
+            <!-- notification message -->
+            <?php if (isset($_SESSION['success'])) : ?>
+              <div class="error success" >
+                <h3>
+                  <?php 
+                    echo $_SESSION['success']; 
+                    unset($_SESSION['success']);
+                  ?>
+                </h3>
+              </div>
+            <?php endif ?>
+        
+            <!-- logged in user information -->
+            <?php  if (isset($_SESSION['username'])) : ?>
+              <?php echo $_SESSION['username']; ?>
+
+              <span class="fas fa-sign-out icon" id="headIcon"></span>
+
+              <p> <a href="index.php?logout='1'" style="color: white;">logout</a>
+            <?php endif ?>
         </div>
         
-        <button class="dropdown-btn">Term Processing 
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-          <ul>
-            <li class="line-1"><a href="scheduling.html">Scheduling</a></li>
-            <li class="line-2"><a href="acad-grades-entry.html">ACAD Grades Entry</a></li>
-            <li class="line-3"><a href="conduct2.html">Conduct</a></li>
-            <li class="line-4"><a href="aptitude2.html">Aptitude</a></li>
-            <li class="line-5"><a href="spdo.html">SPDO</a></li>
-            <li class="line-6"><a href="report.html">Report</a></li>
-          </ul>
-        </div>
-
-        <button class="dropdown-btn">Evaluation
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-          <ul>
-            <li class="line-1"><a href="faculty2.html">Faculty</a></li>
-            <li class="line-2"><a href="course3.html">Course</a></li>
-          </ul>
-        </div>
-
-        <button class="dropdown-btn">End Term Processing
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-          <ul>
-            <li class="line-1"><a href="reports.html">Reports</a></li>
-            <button class="dropdown-content1">Awards
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-container">
-              <ul>
-                <li class="line-1"><a href="deans.html">Dean's List</a></li>
-                <li class="line-2"><a href="comms.html">Comms List</a></li>
-              </ul>
-            </div>
-            <button class="dropdown-content2">Graduation Reports
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-container">
-              <ul>
-                <li class="line-1"><a href="awards.html">Awards</a></li>
-                <li class="line-2"><a href="latin-awards.html">Latin Awards</a></li>
-              </ul>
-            </div>
-          </ul>
-        </div>
-
+        </li>
+      </ul>
     </div>
 
-      <script>
-        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-        var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
-        
-        for (i = 0; i < dropdown.length; i++) {
-          dropdown[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-              dropdownContent.style.display = "none";
-            } else {
-              dropdownContent.style.display = "block";
-            }
-          });
-        }
+  </header>
 
-        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-        var dropdown = document.getElementsByClassName("dropdown-content");
-        var i;
-        
-        for (i = 0; i < dropdown.length; i++) {
-          dropdown[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-              dropdownContent.style.display = "none";
-            } else {
-              dropdownContent.style.display = "block";
-            }
-          });
-        }
 
-        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-        var dropdown = document.getElementsByClassName("dropdown-content1");
-        var i;
-        
-        for (i = 0; i < dropdown.length; i++) {
-          dropdown[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-              dropdownContent.style.display = "none";
-            } else {
-              dropdownContent.style.display = "block";
-            }
-          });
-        }
-
-        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-        var dropdown = document.getElementsByClassName("dropdown-content2");
-        var i;
-        
-        for (i = 0; i < dropdown.length; i++) {
-          dropdown[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-              dropdownContent.style.display = "none";
-            } else {
-              dropdownContent.style.display = "block";
-            }
-          });
-        }
-      </script>
   
 
-  <main>
-    <h2>faculty</h2>
-    <p>This is the main content area.</p>
-  </main>
-</body>
+
+ 
+<nav class="sidebarclass">
+
+  <div class="menu-btn">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <div class="side-bar">
+
+
+
+    <div class="close-btn">
+
+      <i class="fas fa-times"></i>
+    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Philippine_Military_Academy_%28PMA%29.svg/400px-Philippine_Military_Academy_%28PMA%29.svg.png" alt="">
+         <h1>Profile name</h1>
+       </header>
+    <div class="menu">
+      <div class="item">
+        <a class="sub-btn"><i class="fas fa-folder"></i>File Maintenance<i class="fas fa-angle-right dropdown"></i></a>
+        <div class="sub-menu">
+          <a href="cadet.html" class="sub-item">Cadet</a>
+          <a href="faculty.html" class="sub-item">Faculty</a>
+          <a href="department.html" class="sub-item">Department</a>
+          <a href="courses.html" class="sub-item">Courses</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <a class="sub-btn"><i class="fas fa-project-diagram"></i>Initial Term Processing<i class="fas fa-angle-right dropdown"></i></a>
+        <div class="sub-menu">
+          <div class="item">
+            <a class="sub-btn"><i class="fas fa-gears"></i>Term Settings<i class="fas fa-angle-right dropdown"></i></a>
+            <div class="sub-menu">
+              <a href="#" class="sub-item">ACAD</a>
+              <a href="#" class="sub-item">Tactics</a>
+              <a href="#" class="sub-item">Conduct</a>
+              <a href="#" class="sub-item">Aptitude</a>
+            </div>
+          </div>
+          <a href="#" class="sub-item">Course Offerings</a>
+          <a href="#" class="sub-item">Sectioning</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <a class="sub-btn"><i class="fas fa-cubes"></i>Term Processing<i class="fas fa-angle-right dropdown"></i></a>
+        <div class="sub-menu">
+          <a href="#" class="sub-item">Scheduling</a>
+          <a href="#" class="sub-item">ACAD Grades Entry</a>
+          <a href="#" class="sub-item">Conduct</a>
+          <a href="#" class="sub-item">Aptitude</a>
+          <a href="#" class="sub-item">SPDO</a>
+          <a href="#" class="sub-item">Report</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <a class="sub-btn"><i class="fas fa-envelope-open-text"></i>Evaluation<i class="fas fa-angle-right dropdown"></i></a>
+        <div class="sub-menu">
+          <a href="#" class="sub-item">Faculty</a>
+          <a href="#" class="sub-item">Course</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <a class="sub-btn"><i class="fas fa-table"></i>End Term Processing<i class="fas fa-angle-right dropdown"></i></a>
+        <div class="sub-menu">
+          <a href="#" class="sub-item">Reports</a>
+          <div class="item">
+            <a class="sub-btn"><i class="fas fa-award"></i>Awards<i class="fas fa-angle-right dropdown"></i></a>
+            <div class="sub-menu">
+              <a href="#" class="sub-item">Dean's List</a>
+              <a href="#" class="sub-item">Comm's List</a>
+            </div>
+            <div class="item">
+              <a class="sub-btn"><i class="fas fa-scroll"></i>Graduation Reports<i class="fas fa-angle-right dropdown"></i></a>
+              <div class="sub-menu">
+                <a href="#" class="sub-item">Awards</a>
+                <a href="#" class="sub-item">Latin Awards</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+      <script src="header.js"></script> 
+      <script src="navbar.js"></script>
+  
+
+      <br>
+    <main class="continent">
+
+      <div class="searchBox">
+        <input type="text" placeholder="Search here..." />
+        <span class="fas fa-search icon" id="searchIcon"></span>
+      </div>
+      <table>
+        <tr>
+          <th>Header 1</th>
+          <th>Header 2</th>
+          <th>Header 3</th>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+        </tr>
+        <tr>
+          <td>Data 4</td>
+          <td>Data 5</td>
+          <td>Data 6</td>
+        </tr>
+      </table>
+      
+      
+    </main>
+  </body>
 </html>
